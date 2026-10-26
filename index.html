@@ -161,6 +161,70 @@ footer .logo{color:var(--text)}
 .nm1{font-size:clamp(30px,7vw,72px)}
 .nm2{font-family:Onest,system-ui,sans-serif;font-weight:700;font-size:clamp(17px,2.8vw,28px);line-height:1.35;margin:20px auto 0;max-width:20em;text-shadow:0 2px 14px #000c,0 0 30px #5865f2aa}
 @media (max-width:640px){.salute{flex-direction:column-reverse;text-align:center;padding:34px 22px}.salute p{margin-left:auto;margin-right:auto}.sl-b{justify-content:center}.dgw{width:120px}.salute .btn{width:auto;font-size:16px;padding:16px 24px}}
+/* ===== v2: турнир, живой счётчик, анимации ===== */
+#sp{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));z-index:31}
+nav a{position:relative}nav a.on{color:var(--text)}
+nav a.on:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.hero{overflow:hidden}.hero .wrap{z-index:1}
+.aur{position:absolute;inset:-20% -10%;pointer-events:none;filter:blur(60px);opacity:.28}
+.aur i{position:absolute;border-radius:50%;width:46vw;height:46vw;max-width:560px;max-height:560px}
+.aur i:nth-child(1){background:#5865f2;left:-6%;top:-18%;animation:dr1 18s ease-in-out infinite alternate}
+.aur i:nth-child(2){background:#2bb8d6;right:-8%;top:10%;animation:dr2 22s ease-in-out infinite alternate}
+.aur i:nth-child(3){background:#ff7a1a;left:38%;bottom:-30%;opacity:.5;animation:dr1 26s ease-in-out infinite alternate-reverse}
+@keyframes dr1{to{transform:translate(8vw,6vh) scale(1.2)}}@keyframes dr2{to{transform:translate(-9vw,8vh) scale(1.15)}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .aur{opacity:.5}}
+:root[data-theme="dark"] .aur{opacity:.5}
+.live{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:9px 16px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:14px;color:var(--muted)}
+.live[hidden],.live img[hidden]{display:none}
+.live img{width:26px;height:26px;border-radius:50%}
+.live .dot{width:9px;height:9px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84;animation:tw 1.6s ease-in-out infinite}
+.live b{color:var(--text)}
+.card,.rule,.oracle,.side{position:relative;overflow:hidden}
+.card:after,.rule:after,.oracle:after,.side:after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(260px circle at var(--mx,50%) var(--my,-40%),color-mix(in srgb,var(--acc) 20%,transparent),transparent 70%);opacity:0;transition:opacity .25s;pointer-events:none}
+.card:hover:after,.rule:hover:after,.oracle:hover:after,.side:hover:after{opacity:1}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.tour{padding:76px 0 24px}.tour-head{text-align:center}
+.chip{display:inline-flex;gap:8px;font-weight:700;font-size:14px;color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,transparent);padding:7px 14px;border-radius:999px;margin-bottom:16px}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch;margin-top:34px}
+.side{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:26px 24px;box-shadow:0 20px 60px var(--glow)}
+.side h3{font-size:22px;margin:0 0 18px;display:flex;align-items:center;gap:14px}
+.crest{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:30px;background:linear-gradient(135deg,var(--acc),var(--acc2));flex:none}
+.crest svg{width:34px;height:34px;color:#fff}
+.side.R .crest{background:linear-gradient(135deg,#e8403a,#ff7a1a)}
+.pls{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pl{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--text) 5%,transparent);font-weight:500}
+.pl .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:15px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;flex:none}
+.side.R .pl .av{background:linear-gradient(135deg,#e8403a,#ff7a1a)}
+.pl b{font-weight:700;word-break:break-all}
+.pl em{margin-left:auto;font-style:normal;font-size:12px;font-weight:700;color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,transparent);padding:3px 9px;border-radius:999px;white-space:nowrap}
+.pl.tbd{opacity:.55}.pl.tbd .av{background:var(--line);color:var(--muted)}
+.mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;min-width:240px;padding:0 6px}
+.vsb{font-family:Unbounded,sans-serif;font-weight:800;font-size:64px;line-height:1;background:linear-gradient(135deg,var(--acc),#e8403a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 24px var(--glow))}
+.tcd{display:flex;gap:8px}
+.tcd div{min-width:56px;padding:10px 6px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.tcd b{display:block;font-family:Unbounded,sans-serif;font-size:22px;font-variant-numeric:tabular-nums}
+.tcd span{font-size:11px;color:var(--muted)}
+.tbd2{font-weight:700;color:var(--muted);line-height:1.4}
+.prz{padding:14px 22px;border-radius:18px;background:linear-gradient(135deg,color-mix(in srgb,#ffc24a 22%,transparent),color-mix(in srgb,#ff7a1a 14%,transparent));border:1px solid color-mix(in srgb,#ffc24a 45%,transparent)}
+.prz small{display:block;font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.prz b{font-family:Unbounded,sans-serif;font-size:22px}
+.mid .btn{width:100%}.mid .btn[hidden]{display:none}
+html[data-fx="off"] #snow,html[data-fx="off"] .garland,html[data-fx="off"] .tr{display:none!important}
+@media (max-width:860px){.vs{grid-template-columns:1fr}.mid{order:-1;padding:6px 0}.vsb{font-size:48px}}
+@media (prefers-reduced-motion:reduce){.aur i,.live .dot{animation:none}.rv{opacity:1;transform:none;transition:none}}
+@media (max-width:540px){.hact{gap:6px}.lg{display:none}header .btn.s{padding:9px 14px}.logo svg.wm{height:12px}.logo{gap:8px}}
+@media (max-width:420px){#fxb{display:none}}
+@media (max-width:340px){.logo svg.wm{display:none}}
+.host{display:flex;align-items:center;gap:12px;padding:10px 20px 10px 10px;border-radius:999px;background:var(--card);border:1px solid color-mix(in srgb,var(--acc) 40%,transparent);box-shadow:0 10px 30px var(--glow);text-align:left}
+.host[hidden]{display:none}
+.host .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,#9b59ff,var(--acc2));flex:none}
+.host small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);line-height:1.2}
+.host b{display:block}
+.tacts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}.tacts[hidden],.tacts .btn[hidden]{display:none}
+.player{margin:30px auto 0;max-width:860px;aspect-ratio:16/9;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px var(--glow);background:#000}
+.player[hidden]{display:none}.player iframe{width:100%;height:100%;border:0}
+@media (max-width:540px){.tacts .btn{width:100%}}
 @media (max-width:860px){nav{display:none}.hero{padding:44px 0 56px}.hero .wrap{grid-template-columns:1fr}.g4,.g3{grid-template-columns:1fr 1fr}}
 @media (max-width:540px){.g4,.g3{grid-template-columns:1fr}.btn{width:100%}header .btn{width:auto}}
 @media (prefers-reduced-motion:reduce){.msg{animation:none}html{scroll-behavior:auto}.btn,.card{transition:none}}
@@ -168,16 +232,17 @@ footer .logo{color:var(--text)}
 </head>
 <body>
 <div id="snow" aria-hidden="true"></div>
+<div id="sp" aria-hidden="true"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="dr" viewBox="0 0 102 108"><path d="M79.2,12.2 78.7,12.0 74.3,12.0 73.0,12.8 71.5,13.0 67.3,15.8 66.5,16.2 65.5,17.0 63.3,18.2 62.5,19.0 61.7,19.2 60.5,20.0 58.7,20.0 57.8,19.2 57.8,16.7 58.0,16.3 63.0,11.2 63.5,10.8 64.3,10.7 65.8,9.0 65.7,7.7 65.2,7.2 64.7,7.0 62.5,7.0 61.0,8.2 60.5,8.3 58.2,10.0 57.7,10.2 57.2,10.7 56.2,11.2 55.5,11.8 54.8,12.2 53.2,13.8 51.8,14.8 51.0,15.2 49.3,16.8 47.8,19.2 45.7,21.5 43.8,22.7 43.2,22.7 42.5,22.0 41.8,20.8 41.8,19.5 42.8,18.0 42.8,17.0 43.8,15.3 43.8,14.7 44.7,13.7 45.0,12.3 50.5,6.7 50.8,6.0 50.8,5.2 50.3,4.3 49.5,4.0 48.0,4.2 44.8,7.2 43.2,8.3 41.7,9.8 39.8,11.0 38.3,12.7 37.8,13.7 37.2,14.3 36.8,15.5 35.0,17.5 34.7,18.5 33.2,20.3 33.0,21.2 32.2,22.2 31.8,23.2 31.0,24.5 31.0,25.2 30.0,26.7 29.8,27.7 26.7,30.8 25.8,31.3 25.3,31.3 24.8,30.7 24.8,27.5 25.7,26.2 25.8,25.7 25.8,24.3 26.5,23.5 26.2,23.5 25.8,24.0 25.0,24.5 24.0,26.3 22.0,28.3 21.2,29.8 21.0,32.2 20.7,32.7 20.2,32.7 19.8,32.2 19.8,24.7 20.8,23.0 20.8,18.7 21.8,17.0 21.8,15.7 22.0,15.2 22.8,14.0 22.8,11.8 22.7,11.7 22.7,11.2 22.8,11.0 23.0,9.2 23.5,8.7 23.5,8.3 23.2,8.3 22.0,9.5 21.8,10.5 20.0,12.3 19.8,12.8 19.3,13.3 19.0,14.5 18.0,16.2 18.0,17.5 17.8,18.0 17.2,19.0 17.0,20.3 16.0,21.7 16.0,22.8 15.0,24.7 15.0,26.2 14.0,28.0 14.0,30.2 13.2,32.7 13.2,34.0 13.0,34.2 13.0,39.2 12.8,39.3 12.8,40.2 12.3,41.3 12.3,47.2 12.2,47.3 12.0,48.5 11.0,49.8 11.0,51.2 10.2,52.7 10.3,53.7 13.3,56.3 13.2,57.8 12.8,58.7 12.0,59.8 11.8,60.7 11.0,61.8 11.0,62.3 9.0,64.7 8.2,64.8 7.7,64.3 7.7,64.0 6.8,62.5 6.8,61.3 6.7,61.2 6.2,61.3 5.8,62.5 5.0,63.7 5.0,65.7 4.2,67.2 4.3,71.2 5.0,72.3 5.2,75.0 5.8,75.8 6.2,77.0 8.0,80.3 9.7,82.2 10.2,83.7 11.5,84.8 12.3,84.8 12.7,84.5 12.7,84.2 11.8,83.0 11.7,82.2 11.0,81.5 10.8,80.2 9.8,78.5 9.8,77.5 10.3,77.0 11.2,76.8 13.2,78.5 13.8,78.8 14.3,78.8 14.8,79.2 15.5,79.2 15.8,78.7 15.8,76.5 14.8,75.2 14.8,73.7 15.2,73.2 15.8,73.2 17.5,74.8 18.0,74.8 18.2,75.0 19.3,74.8 19.5,74.7 19.5,74.2 18.5,73.8 18.0,73.3 17.8,72.8 17.8,70.7 18.5,69.7 19.3,69.0 19.8,69.2 22.0,71.3 22.7,71.3 22.8,70.8 22.7,70.3 21.8,69.2 21.7,67.8 21.0,66.8 21.0,66.0 22.0,65.0 22.5,65.0 23.0,65.5 23.0,66.0 23.3,66.7 24.5,67.8 26.3,67.8 26.7,67.3 26.5,67.0 25.0,65.5 24.8,64.3 25.2,64.0 25.7,64.0 26.5,64.7 27.2,64.8 27.8,64.3 27.8,63.7 26.0,61.7 25.8,60.7 26.7,59.7 27.2,58.2 28.7,56.5 29.2,55.2 29.7,54.7 30.7,52.8 30.8,51.7 31.3,51.2 31.7,51.2 32.0,51.5 33.0,53.5 33.0,64.0 32.3,65.3 32.2,66.2 31.7,66.8 31.2,66.8 29.7,65.5 29.2,65.7 29.0,66.0 29.0,67.7 29.3,68.5 30.0,69.3 30.0,69.8 30.2,70.0 30.0,71.3 28.3,73.0 27.2,73.0 26.0,72.2 25.5,72.3 25.7,73.0 26.5,73.8 26.7,74.5 26.2,75.0 25.3,75.2 25.2,75.5 25.2,76.7 24.2,77.5 24.2,78.0 25.0,79.3 25.0,81.0 25.3,81.7 28.5,84.8 32.2,84.8 32.5,84.7 32.5,84.2 31.2,83.0 31.0,82.3 31.7,81.8 32.7,81.7 33.3,81.0 35.5,80.7 37.0,79.5 35.0,77.5 34.8,77.2 34.8,75.7 35.3,75.0 36.0,74.8 36.7,74.3 37.0,73.2 39.2,71.0 40.3,70.7 40.8,70.0 40.8,68.2 40.0,67.0 39.8,65.3 40.0,65.2 40.0,64.7 40.7,63.8 40.8,62.7 44.3,59.0 45.0,58.8 45.7,58.3 46.0,57.3 47.7,55.2 47.7,54.8 48.3,53.7 48.2,53.2 47.3,53.2 45.3,55.0 43.5,55.0 42.8,54.2 43.0,53.3 43.5,52.8 43.8,52.2 43.8,51.5 44.2,51.0 47.5,47.8 47.8,47.8 49.5,46.8 53.8,46.5 54.0,46.7 55.3,46.7 55.5,46.8 57.3,46.8 58.3,47.7 59.2,47.8 60.3,48.7 62.8,51.2 63.2,52.3 63.7,52.8 64.2,54.3 65.0,55.5 65.0,62.3 64.0,64.2 64.0,67.5 63.5,68.7 63.2,69.0 63.0,70.5 62.2,71.5 62.0,72.5 61.2,73.5 61.0,74.3 59.8,75.7 58.0,78.5 57.2,79.3 56.8,80.0 55.2,82.0 53.2,83.7 52.5,84.0 51.7,84.8 49.2,86.2 47.0,87.8 46.7,87.8 45.0,88.8 43.5,89.0 42.0,89.8 40.5,90.0 39.0,90.8 37.3,91.0 36.0,91.8 34.5,92.0 33.5,92.8 31.3,94.0 20.7,94.0 19.2,93.0 15.7,93.0 14.5,92.2 13.3,92.0 11.2,90.8 9.2,89.0 7.5,89.0 7.2,89.3 7.3,89.8 12.2,94.7 13.8,95.2 15.2,96.5 15.8,96.8 16.3,96.8 17.2,97.5 17.8,97.8 18.3,97.8 19.8,98.8 20.7,98.8 21.8,99.3 22.2,99.7 23.5,99.8 24.8,100.7 27.0,100.8 27.5,101.0 28.3,101.7 28.8,101.7 29.0,101.8 31.5,101.8 33.5,102.8 47.3,102.8 48.5,103.8 49.3,103.8 51.3,102.0 51.7,101.8 53.0,101.8 53.7,101.5 55.5,99.8 56.3,99.8 57.0,100.5 57.0,102.2 57.2,102.5 57.7,102.5 62.3,98.0 63.5,97.7 65.5,95.8 66.3,95.8 67.0,96.7 67.0,99.5 67.2,99.7 67.7,99.7 68.7,98.7 69.0,97.3 69.7,96.7 70.0,95.5 70.8,94.3 71.0,93.3 72.3,92.0 73.7,91.7 75.2,90.2 75.7,90.2 76.8,91.3 77.0,91.7 77.0,93.3 77.3,93.7 77.7,93.7 78.8,92.3 78.8,90.5 79.8,88.8 79.8,86.2 80.0,85.7 80.8,84.5 80.8,84.0 81.2,83.2 83.2,81.2 83.7,81.2 85.8,83.3 86.0,84.7 86.2,84.8 86.7,84.8 87.8,83.3 88.0,82.3 88.8,81.3 88.8,80.5 87.8,79.2 87.8,76.7 88.8,75.3 88.8,73.8 88.0,72.7 88.0,72.3 88.7,71.5 88.8,70.7 89.5,70.2 90.8,71.7 91.3,71.8 91.8,72.3 92.0,73.3 92.7,74.0 93.5,74.0 93.8,73.5 93.8,68.5 92.8,67.2 92.8,65.5 91.8,64.2 91.8,60.5 92.3,60.0 92.7,60.0 94.0,60.8 96.3,60.8 96.8,60.3 96.8,56.3 94.7,53.3 93.2,51.8 92.8,51.2 92.8,48.3 92.7,48.2 92.7,47.3 93.3,46.8 96.7,46.8 97.2,46.5 97.2,45.8 96.8,45.2 96.8,44.3 96.5,43.7 95.5,43.0 89.0,36.5 88.8,36.2 88.8,35.0 87.8,33.3 88.0,32.5 88.7,31.8 89.3,31.7 90.5,30.8 92.2,30.8 93.7,31.8 94.3,31.8 94.5,31.7 94.5,31.0 94.0,30.5 93.8,29.3 93.2,28.3 91.2,26.3 90.5,26.0 88.5,26.0 86.5,25.0 78.3,25.0 76.5,24.0 75.3,23.8 74.0,22.5 73.7,21.3 73.2,20.8 73.2,20.2 73.8,19.3 73.8,18.7 74.3,18.0 75.5,17.7 76.2,17.0 77.0,16.8 78.2,16.0 79.3,15.7 79.7,15.3 79.8,14.8 79.8,13.2 79.7,12.7ZM18.5,48.0 19.0,48.3 19.2,48.8 19.2,52.7 19.0,52.8 19.0,53.3 18.3,54.0 17.5,54.0 16.8,53.2 16.8,50.7 17.7,49.5 18.0,48.3Z" fill="currentColor" fill-rule="evenodd"/></symbol><symbol id="wm" viewBox="0 0 405 34"><path d="M356.7,5.3 357.0,7.2 357.3,7.7 357.7,7.8 359.2,7.8 359.8,8.2 361.0,9.5 361.0,25.2 360.2,26.0 356.2,26.0 355.5,26.3 355.2,26.8 355.2,28.2 356.0,28.8 369.3,28.8 369.8,28.3 369.8,26.5 369.3,26.0 368.7,26.0 367.2,25.0 365.7,25.0 364.8,24.2 364.7,10.8 364.8,10.7 364.8,9.0 365.2,8.3 365.7,8.0 366.8,8.2 367.8,9.3 368.2,11.2 368.8,12.0 369.2,13.5 369.8,14.2 370.0,15.8 371.7,18.5 372.0,19.3 372.0,20.2 373.0,21.5 373.0,22.2 374.0,23.7 374.0,24.3 375.0,26.2 375.0,27.2 376.2,28.7 377.0,29.0 378.0,29.0 378.2,28.8 381.3,28.8 381.8,28.3 382.0,27.3 382.8,26.2 383.0,24.5 383.8,23.3 383.8,22.0 384.0,21.5 384.7,20.7 385.0,19.2 385.8,18.0 385.8,16.7 386.0,16.2 386.5,15.7 386.8,15.0 386.8,14.5 387.5,13.7 387.8,13.0 387.8,12.5 388.8,11.0 388.8,9.7 389.2,9.0 390.3,8.0 391.0,8.5 391.0,9.0 391.2,9.2 391.2,20.5 391.3,20.7 391.3,22.2 391.2,22.3 391.0,25.2 390.2,26.0 387.3,26.0 386.8,26.3 386.5,26.8 386.5,27.5 386.8,28.2 387.5,28.8 400.0,28.8 400.7,28.3 400.8,27.2 400.7,26.7 399.8,26.0 396.7,26.0 394.8,24.2 394.8,9.5 396.2,8.0 396.5,7.8 397.8,7.8 398.7,7.3 398.8,7.0 398.8,5.5 398.7,5.2 398.3,5.0 386.5,5.0 385.8,5.7 385.2,6.8 385.0,8.3 384.2,9.7 384.0,11.2 383.2,12.3 383.0,13.8 382.2,15.2 382.0,16.5 381.0,18.5 381.0,19.3 380.0,20.8 380.0,22.3 379.3,23.3 379.0,24.3 378.7,24.7 378.2,24.7 377.8,24.3 377.8,22.8 377.0,21.7 376.8,20.2 375.8,18.3 375.0,17.3 374.8,15.7 374.2,14.8 373.8,14.2 373.8,13.7 372.8,12.2 372.7,10.5 371.8,9.3 371.7,8.2 370.8,7.0 370.8,6.2 370.3,5.3 369.7,5.0 357.2,5.0ZM105.2,5.3 105.0,5.7 105.2,12.0 105.7,12.7 106.2,12.8 108.2,12.8 108.7,12.5 108.8,12.2 108.8,9.7 109.7,8.8 123.2,8.8 123.7,9.2 123.7,9.7 121.7,11.7 120.2,12.2 114.3,18.0 111.7,19.8 107.2,24.2 105.2,25.5 104.7,26.8 104.7,27.8 105.2,28.7 105.5,28.8 131.2,28.8 131.7,28.5 131.8,28.2 131.8,21.5 131.3,21.0 129.5,21.0 129.0,21.5 129.0,24.2 128.2,25.0 114.7,25.0 114.2,24.7 114.2,24.2 114.3,24.0 115.8,23.5 124.3,15.0 125.7,14.7 130.7,9.7 131.0,8.2 131.3,7.8 131.8,6.5 131.8,5.7 131.3,5.0 105.7,5.0ZM67.2,5.2 67.0,5.5 67.0,7.2 67.3,7.7 67.7,7.8 70.2,7.8 70.7,8.0 71.2,8.5 71.3,9.0 71.3,10.7 71.2,10.8 71.2,17.7 72.0,20.3 72.0,22.8 73.2,24.7 74.0,25.5 74.2,26.0 77.3,28.5 78.0,28.8 80.0,28.8 80.8,29.2 81.7,29.8 87.2,29.8 88.2,29.0 88.7,28.8 90.2,28.8 91.3,28.0 92.7,27.5 96.7,23.5 96.8,23.2 96.8,8.7 97.7,7.8 98.5,7.8 100.0,7.0 101.3,6.8 101.8,6.3 101.7,5.2 101.3,5.0 88.5,5.0 88.2,5.3 88.0,6.0 88.5,6.7 90.7,7.0 91.8,7.8 93.3,7.8 94.0,8.7 94.0,18.5 93.7,19.5 93.0,20.3 92.8,21.3 92.0,22.5 89.5,24.8 88.7,25.0 87.2,26.0 81.5,26.0 80.5,25.2 79.5,25.0 77.2,23.0 75.8,21.2 75.7,19.8 74.8,18.3 74.8,8.7 75.7,7.8 79.0,7.8 79.3,7.7 79.8,7.0 79.8,5.7 79.7,5.3 79.2,5.0 67.5,5.0ZM252.5,5.0 252.0,5.5 252.0,11.3 252.5,11.8 255.0,11.8 255.3,11.7 255.8,11.0 255.8,8.7 256.7,7.8 265.2,7.8 266.0,8.7 266.0,16.5 266.2,16.7 266.0,24.7 265.3,25.7 264.5,26.0 260.8,26.0 260.5,26.2 260.0,26.8 260.0,28.2 260.2,28.5 260.7,28.8 274.3,28.8 274.8,28.3 274.8,26.5 274.3,26.0 271.7,26.0 271.2,25.8 269.8,24.5 269.8,24.0 269.7,23.8 269.7,12.5 269.8,12.3 269.8,8.5 270.7,7.8 279.2,7.8 280.0,8.7 280.0,10.0 280.5,10.7 280.8,10.8 282.5,10.8 283.3,10.0 282.8,8.3 282.8,5.5 282.3,5.0 276.2,5.0 276.0,4.8 271.8,4.8 271.7,5.0 269.7,5.0 269.5,4.8ZM208.3,5.2 208.0,5.8 208.2,6.3 208.2,8.7 208.3,8.8 208.3,11.0 208.7,11.5 209.3,11.8 211.0,11.8 211.8,11.2 211.8,8.7 212.7,7.8 221.3,7.8 222.0,8.2 222.3,8.7 222.2,10.3 222.3,10.5 222.3,11.5 222.8,12.8 222.8,15.0 223.0,15.2 223.0,15.7 222.8,15.8 222.8,20.0 222.7,20.2 222.7,21.0 222.3,22.0 222.2,25.0 221.2,26.0 217.5,26.0 217.0,26.5 217.0,28.8 217.3,29.5 218.0,29.8 231.0,29.8 231.3,29.7 231.8,28.8 231.7,26.5 231.0,26.0 228.5,26.0 227.3,25.2 226.5,25.0 225.8,24.2 225.8,8.7 226.7,7.8 235.2,7.8 236.0,8.7 236.0,9.8 236.5,10.7 237.0,10.8 239.3,10.8 239.8,10.2 239.8,9.5 239.7,9.3 239.7,6.2 239.8,5.8 239.7,5.3 239.2,5.0 227.5,5.0 227.3,4.8 223.8,4.8 223.7,4.7 222.8,4.7 222.7,4.8 219.7,4.8 219.5,5.0 208.7,5.0ZM324.0,4.7 324.0,6.2 324.3,6.7 325.8,7.0 326.2,7.3 326.8,7.7 327.3,7.7 328.2,8.2 328.0,10.3 327.2,11.7 327.0,13.3 326.2,14.7 325.8,16.8 325.2,17.8 324.8,19.7 324.3,20.2 323.7,22.0 322.0,24.3 321.2,25.2 321.0,26.2 320.5,26.8 320.2,27.0 318.5,27.0 317.8,27.8 317.8,29.0 318.2,29.7 318.5,29.8 330.3,29.8 330.7,29.7 330.8,29.3 330.8,27.5 330.3,27.0 328.0,27.0 327.5,26.8 326.5,25.7 326.8,23.7 327.2,23.0 328.0,22.2 328.7,21.8 342.7,21.8 343.2,22.0 343.8,22.8 344.0,24.3 344.8,25.3 345.0,26.2 344.2,27.0 341.2,27.0 339.5,28.0 339.0,28.7 339.0,29.2 339.5,29.8 353.2,29.8 353.7,29.5 353.8,29.0 353.7,27.7 352.8,27.0 350.7,27.0 350.3,26.8 349.8,26.2 349.7,25.0 347.2,22.2 346.8,21.3 346.8,20.2 345.8,18.3 345.8,17.3 344.8,15.5 344.2,14.8 343.8,14.2 343.8,12.7 342.8,11.2 342.8,9.3 342.3,8.5 343.0,7.8 343.8,7.7 344.8,7.0 346.2,6.8 346.7,6.5 346.8,6.2 346.8,4.7 346.3,4.0 324.5,4.0ZM333.3,8.0 333.7,7.8 337.3,7.8 338.0,8.5 338.2,9.2 339.8,11.5 340.0,12.0 340.0,13.8 340.8,15.2 341.0,16.5 341.2,16.7 341.2,17.3 340.7,17.8 340.2,18.0 330.5,18.0 329.8,17.5 329.7,17.0 329.8,16.8 329.8,15.7 330.8,14.0 330.8,12.7 331.0,12.2 331.7,11.3 331.8,10.5 332.5,9.7 332.8,8.7ZM287.0,4.8 287.0,6.2 287.2,6.5 287.7,6.8 289.3,7.0 290.3,7.7 291.3,8.7 291.8,10.5 291.8,11.2 292.0,11.3 292.0,24.2 291.2,25.0 289.7,25.2 289.0,25.7 288.2,26.0 287.7,26.0 287.0,26.5 287.0,28.3 287.5,28.8 314.3,28.8 314.7,28.7 314.8,28.3 314.8,20.8 314.3,20.2 313.3,20.2 312.2,21.5 312.0,22.0 312.0,24.2 311.2,25.0 296.7,25.0 295.8,24.3 295.8,18.7 296.3,18.0 296.7,17.8 307.7,17.8 308.2,17.5 308.3,16.7 308.0,16.0 307.8,14.7 307.2,14.0 296.7,14.0 296.3,13.8 295.8,13.2 295.8,9.5 295.3,8.5 295.7,8.0 296.2,7.8 310.2,7.8 310.8,8.3 311.0,9.2 311.8,10.3 312.0,11.2 312.3,11.7 312.7,11.8 314.3,11.8 314.8,11.3 314.8,5.7 314.0,4.5 313.2,4.0 288.8,4.0 288.7,4.2 287.5,4.2ZM169.2,4.7 169.0,5.2 169.0,6.8 169.3,7.5 170.0,7.8 172.2,7.8 173.0,8.5 173.2,9.7 173.8,11.2 174.0,13.2 173.8,13.3 173.8,13.8 173.0,15.3 173.0,24.7 172.8,25.2 172.2,25.8 171.7,25.8 171.5,26.0 169.2,26.0 168.8,26.2 168.2,26.8 168.0,27.3 168.2,28.3 168.8,28.8 182.2,28.8 182.7,28.5 182.8,28.2 182.8,26.7 182.5,26.2 182.2,26.0 179.5,26.0 178.5,25.2 177.3,24.8 176.8,24.2 177.0,15.7 177.2,15.5 177.2,14.7 177.5,13.8 177.7,12.5 178.0,12.0 178.5,11.8 179.3,11.8 180.0,12.2 181.8,14.2 182.2,15.2 182.7,15.8 190.2,23.7 195.5,28.8 200.3,28.8 200.8,28.3 200.8,27.0 200.7,26.8 200.7,19.8 200.5,19.7 200.5,18.0 200.0,16.2 200.0,14.7 199.8,14.5 199.8,8.7 200.7,7.8 204.2,7.8 204.5,7.7 204.8,7.2 204.8,5.5 204.3,5.0 192.5,5.0 192.0,5.5 192.0,7.3 192.5,7.8 195.2,7.8 196.0,8.5 196.2,9.0 196.2,10.2 196.8,12.3 196.8,13.5 197.0,13.7 197.0,22.5 197.2,22.7 197.0,23.7 196.7,24.0 196.3,24.0 195.8,23.7 194.0,21.5 188.8,16.3 187.0,13.7 184.0,10.5 183.7,9.5 182.7,8.2 181.0,6.5 180.7,5.5 179.3,4.2 178.2,4.2 178.0,4.0 170.2,4.0ZM136.0,4.7 136.2,6.0 137.5,7.7 138.0,7.8 140.2,7.8 141.0,8.7 141.0,24.2 140.2,25.0 138.8,25.0 137.7,25.8 136.5,26.2 136.0,27.0 136.2,28.3 136.8,28.8 164.2,28.8 164.7,28.5 164.8,28.2 164.8,21.2 164.5,20.5 163.7,20.0 162.3,20.0 161.8,20.2 161.3,20.7 161.0,21.3 161.0,24.3 160.2,25.0 145.7,25.0 144.8,24.2 144.8,18.7 145.3,18.0 145.7,17.8 157.3,17.8 157.8,17.3 157.8,15.2 157.5,14.5 156.7,14.0 146.5,14.0 145.5,14.5 144.8,13.7 144.8,9.8 144.3,8.5 144.8,8.0 145.3,7.8 159.2,7.8 160.0,8.5 160.2,9.2 160.8,10.0 161.0,11.3 161.5,11.8 163.3,11.8 163.8,11.3 163.8,4.8 163.3,4.2 162.8,4.0 150.0,4.0 149.2,4.3 148.8,4.7 148.2,4.7 147.5,4.2 146.5,4.2 146.2,4.3 145.2,4.0 139.2,4.0 138.2,4.3 137.7,4.2 136.3,4.2ZM39.0,4.5 39.0,6.2 39.2,6.5 40.5,7.7 42.7,8.0 43.0,8.5 43.0,9.7 42.2,11.2 41.8,12.8 41.0,14.2 40.8,15.8 40.2,16.7 39.8,18.2 39.2,19.0 39.0,19.7 38.0,21.3 37.8,22.2 37.2,23.0 35.8,25.5 34.5,26.8 34.2,27.0 32.8,27.0 32.3,27.3 32.0,28.2 32.0,28.8 32.5,29.7 32.8,29.8 45.8,29.8 46.3,29.7 46.8,28.8 46.8,28.0 46.2,27.2 45.7,27.0 42.8,27.0 41.7,26.3 41.0,25.5 41.2,25.0 41.8,24.2 42.0,23.2 43.2,22.0 43.7,21.8 57.2,21.8 58.0,22.5 58.0,22.8 58.8,24.2 59.2,26.5 58.3,27.0 56.3,27.0 54.5,28.0 54.0,28.7 54.0,29.3 54.5,29.8 68.0,29.8 68.7,29.3 68.8,29.0 68.8,28.0 68.3,27.2 67.8,27.0 63.7,27.0 63.0,26.5 62.8,26.2 62.8,24.7 61.8,23.2 61.8,21.7 60.8,20.0 60.8,18.7 59.8,17.2 59.7,16.0 59.0,15.2 58.8,13.5 57.8,12.0 57.8,10.2 57.0,8.8 57.0,8.3 57.7,7.8 58.2,7.8 58.8,7.5 59.7,6.8 61.3,6.8 61.8,6.3 61.7,5.2 60.7,4.2 60.3,4.0 39.5,4.0ZM47.3,8.0 47.7,7.8 52.5,7.8 53.3,8.2 53.7,8.5 54.0,9.5 54.0,12.7 54.2,13.2 54.8,14.0 55.2,15.3 56.0,16.5 56.0,17.2 55.5,17.8 55.2,18.0 44.5,18.0 44.0,17.3 44.8,16.0 44.8,15.5 45.7,14.3 45.8,13.5 46.8,12.0 46.8,8.7ZM4.2,4.3 4.0,5.3 4.5,5.8 5.3,6.0 6.2,6.7 7.7,7.2 9.0,8.7 9.0,24.3 8.3,25.0 7.5,25.3 7.2,25.7 6.5,26.0 5.3,26.2 5.0,26.5 4.3,27.8 4.8,28.7 5.2,28.8 30.3,28.8 30.8,28.3 30.8,21.5 30.3,21.0 29.2,21.2 28.2,22.2 28.0,22.5 28.0,24.2 27.2,25.0 13.7,25.0 13.3,24.8 12.8,24.2 12.8,8.7 15.3,6.0 17.7,5.7 17.8,4.5 17.2,4.0 4.7,4.0Z" fill="currentColor" fill-rule="evenodd"/></symbol></defs></svg>
 <header><div class="wrap">
  <a class="logo" href="#top" aria-label="Lauzent Team"><svg class="mk" viewBox="0 0 102 108" aria-hidden="true"><use href="#dr"/></svg><svg class="wm" viewBox="0 0 405 34" aria-hidden="true"><use href="#wm"/></svg></a>
- <nav><a href="#about">О сервере</a><a href="#rules">Правила</a><a href="#faq">Вопросы</a></nav>
- <div class="hact"><button class="tg" id="tg" type="button" aria-label="Сменить тему">🌙</button><a class="btn p s" href="https://discord.gg/YsG9EVzaXR" target="_blank" rel="noopener">Войти в Discord</a></div>
+ <nav><a href="#tournament">Турнир</a><a href="#about">О сервере</a><a href="#rules">Правила</a><a href="#faq">Вопросы</a></nav>
+ <div class="hact"><button class="tg" id="fxb" type="button" aria-label="Новогодние эффекты" title="Выключить новогодние эффекты">❄️</button><button class="tg" id="tg" type="button" aria-label="Сменить тему">🌙</button><a class="btn p s" href="https://discord.gg/YsG9EVzaXR" target="_blank" rel="noopener"><span class="lg">Войти в </span>Discord</a></div>
  <div class="garland" id="gl" aria-hidden="true"></div>
 </div></header>
 
 <main id="top">
-<div class="hero"><div class="wrap">
+<div class="hero"><div class="aur" aria-hidden="true"><i></i><i></i><i></i></div><div class="wrap">
  <div>
   <span class="tag"><i></i>🎄 Двери открыты, встречаем Новый год</span>
   <h1>Lauzent <span>Team</span></h1>
@@ -187,6 +252,7 @@ footer .logo{color:var(--text)}
    <button class="btn g" id="cp" type="button">Скопировать ссылку</button>
   </div>
   <div class="hint" id="hint" aria-live="polite"></div>
+  <div class="live" id="live" hidden><img alt="" width="26" height="26" hidden><span class="dot"></span><span><b id="lv-on">0</b> онлайн</span><span>·</span><span><b id="lv-all">0</b> участников</span></div>
   <div class="promo">
    <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M40 150C-20 130 0 40 60 30C30 70 60 100 80 110Z" fill="#ff7a1a"/><ellipse cx="105" cy="135" rx="45" ry="50" fill="#ff7a1a"/><ellipse cx="110" cy="145" rx="26" ry="34" fill="#ffd9a8"/><circle cx="125" cy="80" r="34" fill="#ff7a1a"/><path d="M105 55L100 22L124 48Z M138 50L152 20L158 62Z" fill="#ff7a1a"/><circle cx="136" cy="78" r="6" fill="#0c2a2e"/><circle cx="138" cy="76" r="2" fill="#fff"/><circle cx="158" cy="90" r="5" fill="#0c2a2e"/><path d="M96 62C102 22 140 8 164 34C150 40 128 50 100 68Z" fill="#e8403a"/><path d="M92 64C112 54 142 50 168 56" stroke="#fff" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="166" cy="28" r="9" fill="#fff"/></svg>
    <div><h3>🎁 Новогодний подарок от Belka VPN</h3><p>3 дня бесплатно: защита данных, безлимитный трафик и любые устройства.</p>
@@ -201,6 +267,24 @@ footer .logo{color:var(--text)}
   <div class="msg"><span class="av">L</span><div class="bub">Всем привет! Кто сегодня в голосовом? 👋</div></div>
  </div>
 </div></div>
+
+<section class="tour" id="tournament"><div class="wrap">
+ <div class="tour-head"><span class="chip">🏆 Турнир по Counter-Strike 2</span>
+  <h2 class="h2">Lauzent Team vs Dragon Team</h2>
+  <p class="sub">Командный матч 5 на 5, призовой фонд и общий чат в Discord. Следи за новостями здесь и на сервере.</p></div>
+ <div class="vs">
+  <div class="side L"><h3><span class="crest"><svg viewBox="0 0 102 108" aria-hidden="true"><use href="#dr"/></svg></span>Lauzent Team</h3><ul class="pls" id="rl"></ul></div>
+  <div class="mid"><div class="host" id="host"></div><div class="vsb">VS</div>
+   <div class="tcd" id="tcd"></div>
+   <div class="prz"><small>Призовой фонд</small><b id="prz">Скоро объявим</b></div>
+   <a class="btn p" id="tb" href="#" target="_blank" rel="noopener" hidden>📺 Смотреть трансляцию</a>
+   <a class="btn g" id="rb" href="#" target="_blank" rel="noopener" hidden>📄 Правила турнира</a>
+   <a class="btn g" href="https://discord.gg/YsG9EVzaXR" target="_blank" rel="noopener">💬 Обсудить в Discord</a></div>
+  <div class="side R"><h3><span class="crest">🐲</span>Dragon Team</h3><ul class="pls" id="rd"></ul></div>
+ </div>
+ <div class="tacts" hidden><button class="btn g" id="ics" type="button" hidden>📅 Добавить в календарь</button></div>
+ <div class="player" id="player" hidden></div>
+</div></section>
 
 <section class="ny"><div class="wrap">
  <h2 class="h2">До Нового года осталось</h2>
@@ -290,6 +374,19 @@ footer .logo{color:var(--text)}
 
 <canvas id="fwc" aria-hidden="true"></canvas><div id="nym" aria-hidden="true"><div class="nm1">С Новым годом,<br>Lauzent Team! 🎉</div><div class="nm2" id="wish"></div></div>
 <script>
+/* ===== НАСТРОЙКИ ТУРНИРА: меняйте только это ===== */
+const TOUR={
+ date:null,      // дата и время матча, например '2026-12-20T18:00:00+03:00' (null = «скоро объявим»)
+ prize:null,     // призовой фонд, например '50 000 ₽' (null = «скоро объявим»)
+ stream:null,    // ссылка на трансляцию, например 'https://twitch.tv/ivanbelka47' (null = кнопка скрыта)
+ rules:null,     // ссылка на правила или соглашение (null = кнопка скрыта)
+ streamer:'ivanbelka47',  // стример (показывается над VS)
+ streamerLink:null,      // ссылка на канал стримера, например 'https://twitch.tv/ivanbelka47'
+ twitch:null,            // канал Twitch для встроенного плеера, например 'ivanbelka47' (null = плеер скрыт)
+ lauzent:['dark1d','sigma','quide','miN0ne_','mmanto'],
+ dragon:['wudi','silent','','','']   // пустая строка = «скоро объявим»
+};
+/* ================================================= */
 const LINK='https://discord.gg/YsG9EVzaXR',cp=document.getElementById('cp'),hint=document.getElementById('hint');
 cp.addEventListener('click',async()=>{
   let ok=false;
@@ -420,6 +517,52 @@ cp.addEventListener('click',async()=>{
   function start(){score=0;time=30;gs.textContent=0;gt.textContent=30;ov.style.display='none';run=true;last=performance.now();spawnAt=.2;items=[];
    tmr=setInterval(()=>{time--;gt.textContent=time;if(time<=0)end()},1000);raf=requestAnimationFrame(loop)}
   document.getElementById('gp').addEventListener('click',start)})();
+ (function(){
+  const $=id=>document.getElementById(id),esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ros=(arr,el)=>{el.innerHTML=arr.map(x=>{const a=String(x).split('|'),n=a[0].trim();if(!n)return '<li class="pl tbd"><span class="av">?</span><b>Скоро объявим</b></li>';return '<li class="pl"><span class="av">'+esc(n[0].toUpperCase())+'</span><b>'+esc(n)+'</b>'+(a[1]?'<em>'+esc(a[1])+'</em>':'')+'</li>'}).join('')};
+  ros(TOUR.lauzent,$('rl'));ros(TOUR.dragon,$('rd'));
+  if(TOUR.prize)$('prz').textContent=TOUR.prize;
+  if(TOUR.stream){$('tb').href=TOUR.stream;$('tb').hidden=false}
+  if(TOUR.rules){$('rb').href=TOUR.rules;$('rb').hidden=false}
+  const box=$('tcd'),T=TOUR.date?new Date(TOUR.date):null;
+  function tk(){if(!T||isNaN(T)){box.innerHTML='<div class="tbd2" style="border:0;background:none">Дата матча —<br>скоро объявим</div>';return false}
+   const ms=T-new Date();if(ms<=0){box.innerHTML='<div class="tbd2" style="border:0;background:none">🔴 Матч начался!</div>';return false}
+   const d=Math.floor(ms/864e5),h=Math.floor(ms/36e5)%24,m=Math.floor(ms/6e4)%60,s=Math.floor(ms/1e3)%60,p=x=>String(x).padStart(2,'0');
+   box.innerHTML='<div><b>'+d+'</b><span>дн</span></div><div><b>'+p(h)+'</b><span>ч</span></div><div><b>'+p(m)+'</b><span>мин</span></div><div><b>'+p(s)+'</b><span>сек</span></div>';return true}
+  if(tk()){const t=setInterval(()=>{if(!tk())clearInterval(t)},1000)}
+ })();
+ (function(){const box=document.getElementById('live');if(!box||!window.fetch)return;
+  fetch('https://discord.com/api/v9/invites/YsG9EVzaXR?with_counts=true').then(r=>r.ok?r.json():Promise.reject()).then(d=>{
+   const all=d.approximate_member_count;if(!all)return;
+   document.getElementById('lv-on').textContent=d.approximate_presence_count||0;document.getElementById('lv-all').textContent=all;
+   const g=d.guild||{};if(g.id&&g.icon){const im=box.querySelector('img');im.src='https://cdn.discordapp.com/icons/'+g.id+'/'+g.icon+'.png?size=64';im.hidden=false}
+   box.hidden=false}).catch(()=>{})})();
+ (function(){const b=document.getElementById('fxb'),r=document.documentElement;let off=false;try{off=localStorage.getItem('lz_fx')==='off'}catch(e){}
+  const apply=()=>{r.dataset.fx=off?'off':'on';b.style.opacity=off?.45:1;b.title=off?'Включить новогодние эффекты':'Выключить новогодние эффекты'};apply();
+  b.addEventListener('click',()=>{off=!off;try{localStorage.setItem('lz_fx',off?'off':'on')}catch(e){}apply()})})();
+ (function(){
+  const pr=document.getElementById('sp'),upd=()=>{const h=document.documentElement,m=h.scrollHeight-h.clientHeight;pr.style.width=(m>0?h.scrollTop/m*100:0)+'%'};
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+  document.querySelectorAll('.card,.side,.rule,.oracle').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+  const links=[...document.querySelectorAll('nav a')],secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  if('IntersectionObserver' in window){
+   const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-40% 0px -55% 0px'});secs.forEach(x=>x&&io2.observe(x));
+   if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el=e.target;el.classList.add('in');io.unobserve(el);setTimeout(()=>{el.classList.remove('rv','in');el.style.transitionDelay=''},900)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.card,.rule,.h2,.sub,.salute,.oracle,.namegen,.game,.join,details,.vs>*,.cd>div').forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=Math.min(i%4,3)*70+'ms';io.observe(el)})}}
+ })();
+ (function(){
+  const $=id=>document.getElementById(id),esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const host=$('host'),nm=TOUR.streamer;
+  if(nm){const inner='<div class="av">'+esc(nm[0].toUpperCase())+'</div><div><small>🎥 Стример</small><b>'+esc(nm)+'</b></div>';
+   host.innerHTML=TOUR.streamerLink?'<a href="'+esc(TOUR.streamerLink)+'" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;color:inherit">'+inner+'</a>':inner}else host.hidden=true;
+  if(TOUR.twitch){const pl=$('player');pl.innerHTML='<iframe src="https://player.twitch.tv/?channel='+encodeURIComponent(TOUR.twitch)+'&parent='+encodeURIComponent(location.hostname||'localhost')+'&muted=true" allowfullscreen loading="lazy" title="Трансляция матча"></iframe>';pl.hidden=false}
+  function dl(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+  const D=TOUR.date?new Date(TOUR.date):null;
+  if(D&&!isNaN(D)){const b=$('ics');b.hidden=false;document.querySelector('.tacts').hidden=false;b.addEventListener('click',()=>{const f=d=>d.toISOString().replace(/[-:]|\.\d{3}/g,''),E=new Date(D.getTime()+2*36e5);
+   const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Lauzent Team//RU','BEGIN:VEVENT','UID:lauzent-match-'+D.getTime()+'@lauzent-team','DTSTAMP:'+f(new Date()),'DTSTART:'+f(D),'DTEND:'+f(E),'SUMMARY:Lauzent Team vs Dragon Team (CS2)','DESCRIPTION:Турнир по Counter-Strike 2. Discord: https://discord.gg/YsG9EVzaXR','END:VEVENT','END:VCALENDAR'].join('\r\n');
+   dl(new Blob([txt],{type:'text/calendar'}),'lauzent-match.ics')})}
+ })();
 })();
 </script>
 </body>
